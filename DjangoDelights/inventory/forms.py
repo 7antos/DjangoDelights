@@ -7,7 +7,7 @@ from .models import *
 class IngredientForm(forms.ModelForm):
     name = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'input-bar normal-input', 'placeholder': 'Enter Ingredient Name'}), required=True)
-    price = forms.DecimalField(required=True, initial=0, min_value=0.01, decimal_places=2,
+    price = forms.DecimalField(required=True, initial=0, min_value=0, decimal_places=2,
                                max_digits=6, widget=forms.NumberInput(
                                 attrs={'class': "input-bar input-with-logo dollar-bar small-input",
                                                 "placeholder": "Price"}))

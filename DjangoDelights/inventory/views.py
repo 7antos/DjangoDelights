@@ -31,7 +31,7 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             call_command('flush', verbosity=0, interactive=False)
-            call_command('loaddata', 'default_db.json', verbosity=0)
+            call_command('loaddata', 'initial_db.json', verbosity=0)
             login(request, user)
             return HttpResponseRedirect(reverse('home'))
         else:
@@ -62,6 +62,8 @@ def ingredients(request):
             context['form'] = IngredientForm(request.POST)
             if context['form'].is_valid():
                 context['form'].save()
+
+            print(context['form'])
 
     # Queryset
     if context['object_list']:
