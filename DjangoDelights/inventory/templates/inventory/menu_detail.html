@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ menu.name }}{% endblock %}
+
+{% block main %}
+    <div class="table-cont">
+        <span class="table-cont-title">{{ menu.name }}</span>
+        <div class="table-cont-inner">
+            <div class="table-utils" id="stock-table-utils">
+                <form method="get">
+                    {{ filter.form.name }}
+                </form>
+                <div class="utils-buttons">
+                    <button class="button button1" onclick="location.href='{% url 'recipe_ingredients' menu.id %}'">
+                        Add Ingredient
+                    </button>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th class="text-header">Ingredients</th>
+                    <th class="text-header">Total Price</th>
+                    <th class="text-header">Quantity</th>
+                </tr>
+                {% if object_list %}
+                    {% for recipe in object_list %}
+                        <tr>
+                            <td class="text-cell">{{ recipe.ingredient.name }}</td>
+                            <td class="text-cell">{{ recipe.total }} $</td>
+                            <td class="input-cell">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="number" class="input-bar input-with-logo add-bar small-input"
+                                           aria-label="Add Bar" value="{{ recipe.quantity }}"
+                                           min="0" step=".01"
+                                           name="quantity">
+                                    <input type="hidden" value="{{ recipe.id }}" name="id"/>
+                                </form>
+                            </td>
+                            <td class="input-cell">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="button delete" value=" " name="delete">
+                                    <input type="hidden" value="{{ recipe.id }}" name="id"/>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="text-cell empty-cell" colspan="5">No Ingredient found in Recipe</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="stats dual">
+                <div class="stat-text">
+                    <b>{{ menu.name }} Total Cost : </b>{{ menu.cost }} $
+                </div>
+                <div class="stat-text">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"><</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                    {{ page_obj.number }} of {{ paginator.num_pages }} pages
+                    {% if page_obj.has_next %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="?page={{ page_obj.next_page_number }}">></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="table-bottom">
+                <button class="button button1" onclick="location.href='{% url 'menus' %}'">Back</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

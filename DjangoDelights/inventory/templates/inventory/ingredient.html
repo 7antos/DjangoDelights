@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Stock{% endblock %}
+
+{% block main %}
+    <div class="table-cont">
+        <span class="table-cont-title">Stock</span>
+        <div class="table-cont-inner">
+            <div class="table-utils" id="stock-table-utils">
+                <form method="get">
+                    {{ filter.form.name }}
+                </form>
+                <div class="utils-buttons">
+                    <button class="button button2" onclick="location.href='{% url 'restock' %}'">Restock List</button>
+                    <button class="button button1" onclick="add_ingredient_mode()">Add</button>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th class="text-header">Ingredients</th>
+                    <th class="text-header">Price per Item</th>
+                    <th class="text-header">Inventory</th>
+                    <th class="text-header">Restock</th>
+                </tr>
+                {% if object_list %}
+                    {% for ingredient in object_list %}
+                        <tr>
+                            <td class="text-cell">{{ ingredient.name }}</td>
+                            <td class="text-cell">{{ ingredient.price }} $</td>
+                            <td class="{% if ingredient.restock_needed > 0 %}red-text-cell{% else %}text-cell{% endif %}">{{ ingredient.stock }}</td>
+                            <td class="input-cell">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="number" class="input-bar input-with-logo add-bar small-input"
+                                           aria-label="Add Bar" value="0"
+                                           min="0"
+                                           name="stock">
+                                    <input type="hidden" value="{{ ingredient.id }}" name="id"/>
+                                </form>
+                            </td>
+                            <td class="input-cell">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="button delete" value=" " name="delete">
+                                    <input type="hidden" value="{{ ingredient.id }}" name="id"/>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="text-cell empty-cell" colspan="5">No Ingredient Found</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="stats dual">
+                <div class="stat-text">
+                    <b>Inventory Total Cost : </b>{{ total }} $
+                </div>
+                <div class="stat-text">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"><</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                    {{ page_obj.number }} of {{ paginator.num_pages }} pages
+                    {% if page_obj.has_next %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="?page={{ page_obj.next_page_number }}">></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="table-bottom">
+                <button class="button button1" onclick="location.href='{% url 'home' %}'">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        {% if form.errors %}
+            window.onload = add_ingredient_mode;
+        {% endif %}
+
+        function add_ingredient_mode() {
+            document.getElementById("stock-table-utils").outerHTML =
+                `<form method="post" class="table-utils">` +
+                `{% csrf_token %}` +
+                `<div>` +
+                {% if form.name.errors %}
+                `<input type="text" class="input-bar normal-input error-bar" aria-label="Search Bar" name="name" placeholder="Ingredient already exists" required>` +
+                {% else %}
+                `<input type="text" class="input-bar normal-input" aria-label="Search Bar" name="name" placeholder="Enter Ingredient Name" required>` +
+                {% endif %}
+                `{{ form.price }}` +
+                `</div>` +
+                `<div class="utils-buttons">` +
+                `<button class="button button2" onclick="location.href='{% url 'ingredients' %}'">Cancel</button>` +
+                `<input type='submit' class="button button1" value='Add'>` +
+                `</div>` +
+                `</form>`;
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock %}
+
+{% block main %}
+    <button class="menu-button" onclick="location.href='{% url 'ingredients' %}'">
+        <span class="menu-title">Stock</span>
+        <img src="{% static 'assets/inventory.svg' %}" alt="inventory">
+    </button>
+    <button class="menu-button" onclick="location.href='{% url 'menus' %}'">
+        <span class="menu-title">Menu</span>
+        <img src="{% static 'assets/restaurant.svg' %}" alt="menus">
+    </button>
+    <button class="menu-button" onclick="location.href='{% url 'purchases' %}'">
+        <span class="menu-title">Purchases</span>
+        <img src="{% static 'assets/paid.svg' %}" alt="purchases">
+    </button>
+{% endblock %}

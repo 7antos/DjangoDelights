@@ -1,0 +1,11 @@
+{% load static %}
+
+<nav>
+    <img src="{% static 'assets/brand.png' %}" alt="brand" class="brand">
+    {% if user.is_authenticated %}
+        <div class="left-navbar">
+            {{ user.get_username }}
+            <a class="nav-button logout" href="{% url 'login' %}"></a>
+        </div>
+    {% endif %}
+</nav>

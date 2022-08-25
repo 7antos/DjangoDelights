@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Menu{% endblock %}
+
+{% block main %}
+    <div class="table-cont">
+        <span class="table-cont-title">Purchases</span>
+        <div class="table-cont-inner">
+            <div class="table-utils">
+                <form method="get">
+                    {{ filter.form.menuItem__name }}
+                </form>
+            </div>
+            <table>
+                <tr>
+                    <th class="text-header">Item</th>
+                    <th class="text-header">Price</th>
+                    <th class="text-header">Date</th>
+                </tr>
+                {% if object_list %}
+                    {% for purchase in object_list %}
+                        <tr>
+                            <td class="text-cell">{{ purchase.menuItem.name }}</td>
+                            <td class="text-cell">{{ purchase.menuItem.price }} $</td>
+                            <td class="text-cell">{{ purchase.time }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="text-cell empty-cell" colspan="5">No Purchases Found</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="stats dual">
+                <div class="stat-text">
+                    <b>Revenue : </b>{{ revenue }} $&nbsp;&nbsp;&nbsp;&nbsp;<b>Profit : </b>{{ profit }} $
+                </div>
+                <div class="stat-text">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"><</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                    {{ page_obj.number }} of {{ paginator.num_pages }} pages
+                    {% if page_obj.has_next %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="?page={{ page_obj.next_page_number }}">></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="table-bottom">
+                <button class="button button1" onclick="location.href='{% url 'home' %}'">Back</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

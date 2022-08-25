@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Menu{% endblock %}
+
+{% block main %}
+    <div class="table-cont">
+        <span class="table-cont-title">Menu</span>
+        <div class="table-cont-inner">
+            <div class="table-utils" id="menu-table-utils">
+                <form method="get">
+                    {{ filter.form.name }}
+                </form>
+                <div class="utils-buttons">
+                    <button class="button button1" onclick="add_menu_mode()">Add</button>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th class="text-header">Menu</th>
+                    <th class="text-header">Price per Item</th>
+                    <th class="text-header">Inventory</th>
+                </tr>
+                {% if object_list %}
+                    {% for menu in object_list %}
+                        <tr>
+                            <td class="text-cell">{{ menu.name }}</td>
+                            <td class="text-cell">{{ menu.price }} $</td>
+                            <td class="{% if menu.needs_stock %}red-text-cell{% else %}text-cell{% endif %}">{{ menu.stock }}</td>
+                            <td class="input-cell">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="button button2"  value="Purchase" name="purchase" {% if menu.stock == 0 %}disabled{% endif %}>
+                                    <input type="hidden" value="{{ menu.id }}" name="id"/>
+                                </form>
+                            </td>
+                            <td class="input-cell">
+                                <button class="button button1" onclick="location.href='{% url 'menu' menu.id %}'">
+                                    View
+                                </button>
+                            </td>
+                            <td class="input-cell">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="button delete" value=" " name="delete">
+                                    <input type="hidden" value="{{ menu.id }}" name="id"/>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="text-cell empty-cell" colspan="5">No Menu Found</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="stats solo">
+                <div class="stat-text">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"><</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                    {{ page_obj.number }} of {{ paginator.num_pages }} pages
+                    {% if page_obj.has_next %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="?page={{ page_obj.next_page_number }}">></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="table-bottom">
+                <button class="button button1" onclick="location.href='{% url 'home' %}'">Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        {% if form.errors %}
+            window.onload = add_menu_mode;
+        {% endif %}
+
+        function add_menu_mode() {
+            document.getElementById("menu-table-utils").outerHTML =
+                `<form method="post" class="table-utils">` +
+                `{% csrf_token %}` +
+                `<div>` +
+                {% if form.name.errors %}
+                `<input type="text" class="input-bar normal-input error-bar" aria-label="Search Bar" name="name" placeholder="Menu already exists" required>` +
+                {% else %}
+                `<input type="text" class="input-bar normal-input" aria-label="Search Bar" name="name" placeholder="Enter Menu Name" required>` +
+                {% endif %}
+                `{{ form.price }}` +
+                `{{ form.minStock }}` +
+                `</div>` +
+                `<div class="utils-buttons">` +
+                `<button class="button button2" onclick="location.href='{% url 'menus' %}'">Cancel</button>` +
+                `<input type='submit' class="button button1" value='Add'>` +
+                `</div>` +
+                `</form>`;
+        }
+    </script>
+{% endblock %}

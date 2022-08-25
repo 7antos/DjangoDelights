@@ -1,0 +1,374 @@
+:root {
+    --brown1: #664325;
+    --brown2: #635244;
+    --brown3: #E89B58;
+    --brown2-dis: rgba(99, 82, 68, 0.25);
+    --brown3-dis: rgba(232, 155, 88, 0.25);
+    --brown4: #B09278;
+    --brown5: #E3BC9A;
+    --red: #d02f2f;
+}
+
+* {
+    color: var(--brown3);
+    font-family: "Source Sans Pro", serif;
+    font-size: 1rem;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    background-color: var(--brown1);
+    margin: 0;
+}
+
+/* Navbar */
+nav {
+    background-color: var(--brown2);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+}
+
+.brand {
+    height: 54px;
+}
+
+.left-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-button {
+    display: inline-block;
+    width: 40px;
+    height: 36px;
+    background-size: cover;
+    margin-left: 5px;
+}
+
+.logout {
+    background-image: url(../assets/logout.svg);
+}
+
+.logout:hover {
+    background-image: url(../assets/logout-hover.svg);
+}
+
+/* Main */
+main {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-top: 64px;
+    margin-bottom: 64px;
+    width: 100%;
+}
+
+/* Menu Buttons */
+.menu-button {
+    border: 0;
+    border-radius: 15px;
+    padding: 45px 10px;
+    font-size: 40px;
+    font-weight: bold;
+    width: 250px;
+    box-shadow: 0 2px 5px black;
+    color: var(--brown3);
+    background-color: var(--brown2);
+}
+
+.menu-button:hover {
+    box-shadow: 0 0 0 var(--brown5);
+}
+
+.menu-button:active {
+    box-shadow: 0 2px 5px black;
+}
+
+.menu-title {
+    display: block;
+    font-size: 40px;
+}
+
+/* Input Bar */
+.input-bar{
+    border: 0;
+    border-radius: 15px;
+    padding: 5px 40px 5px 15px;
+    color: var(--brown1);
+    box-shadow: 0 2px 5px black;
+    margin-left: 5px;
+    margin-right: 2px;
+    background-color: var(--brown4);
+}
+
+.input-bar:-webkit-autofill,
+.input-bar:-webkit-autofill:hover,
+.input-bar:-webkit-autofill:focus,
+.input-bar:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--brown4) inset !important;
+}
+
+.input-bar::placeholder {
+    color: var(--brown2);
+}
+
+.error-bar::placeholder {
+    color: var(--red);
+}
+
+.input-with-logo{
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: right;
+    background-size: 25px;
+}
+
+
+.small-input{
+    width: 60px;
+}
+
+
+.small-without-logo-input{
+    width: 80px;
+}
+
+.normal-input{
+    width: 180px;
+}
+
+.input-bar:focus, .input-bar:-webkit-autofill, .input-bar:-webkit-autofill:focus  {
+    outline: none;
+    box-shadow: 0 0 0 var(--brown5);
+}
+
+.search-bar {
+    background-image: url(../assets/search.svg);
+    background-position-x: 200px;
+}
+
+.add-bar {
+    background-image: url(../assets/add.svg);
+    background-position-x: 80px;
+}
+
+.dollar-bar {
+    background-image: url(../assets/dollar.svg);
+    background-position-x: 80px;
+}
+
+/* Buttons */
+.button {
+    border: 0;
+    border-radius: 15px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px black;
+}
+
+.button:hover:enabled {
+    box-shadow: 0 0 0 var(--brown5);
+}
+
+.button:active:enabled {
+    box-shadow: 0 2px 5px black;
+}
+
+.button1 {
+    padding: 2px 15px;
+    color: var(--brown1);
+    background-color: var(--brown3);
+    margin: 5px;
+}
+
+.button2 {
+    padding: 2px 15px;
+    color: var(--brown3);
+    background-color: var(--brown2);
+    margin: 5px;
+}
+
+.button2:disabled:disabled  {
+    color: var(--brown3-dis);
+    background-color: var(--brown2-dis);
+}
+
+.delete {
+    padding: 5px;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: right;
+    background-size: 25px;
+    background-color: var(--brown2);
+    margin-left: 5px;
+    background-image: url(../assets/delete.svg);
+    width: 40px;
+    background-position-x: 7px;
+}
+
+.delete {
+    border: 0;
+    border-radius: 15px;
+    padding: 5px;
+    background-repeat: no-repeat;
+    background-attachment: local;
+    background-position: right;
+    background-size: 25px;
+    background-color: var(--brown2);
+    box-shadow: 0 2px 5px black;
+    margin-left: 5px;
+    margin-right: 2px;
+    background-image: url(../assets/delete.svg);
+    width: 40px;
+    overflow: hidden;
+    background-position-x: 7px;
+}
+
+/* Table */
+table {
+    border-spacing: 5px;
+    border-collapse: separate;
+    table-layout: auto;
+    width: 100%;
+}
+
+th, td .text-cell {
+    padding: 0 10px;
+}
+
+.text-header, .text-header a {
+    color: var(--brown5);
+    text-align: left;
+}
+
+.text-header a:hover {
+    color: var(--brown3);
+}
+
+.text-header a:active {
+    color: var(--brown5);
+}
+
+.text-cell {
+    background-color: var(--brown5);
+    color: var(--brown1);
+    padding: 10px;
+}
+
+.red-text-cell {
+    background-color: var(--brown5);
+    color: var(--red);
+    padding: 10px;
+}
+
+.input-cell {
+    width: 30px;
+    overflow: hidden;
+}
+
+.empty-cell {
+    text-align: center;
+}
+
+/* Table Container */
+.table-cont {
+    border: 0;
+    border-radius: 15px;
+    padding: 20px 30px 30px 30px;
+    box-shadow: 0 2px 5px black;
+    color: var(--brown3);
+    background-color: var(--brown2);
+    display: inline-block;
+    min-width: 800px;
+}
+
+.table-cont-title {
+    font-size: 40px;
+    font-weight: bold;
+    padding-left: 30px;
+}
+
+.table-cont-inner {
+    border: 0;
+    border-radius: 15px;
+    padding: 25px 30px 20px 30px;
+    margin-top: 5px;
+    box-shadow: 0 2px 5px black;
+    color: var(--brown3);
+    background-color: var(--brown1);
+}
+
+.table-utils {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.utils-buttons {
+    margin-left: 15px;
+}
+
+.stats {
+    color: var(--brown2);
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+}
+
+.dual {
+    justify-content: space-between;
+}
+
+.solo {
+    justify-content: end;
+}
+
+.stat-text, .stat-text b, .stat-text a {
+    color: var(--brown5);
+}
+
+.stat-text a:hover {
+    color: var(--brown3);
+}
+
+.table-bottom {
+    margin-top: 5px;
+}
+
+/* Login Container */
+.login-cont {
+    border: 0;
+    border-radius: 15px;
+    padding: 30px 60px;
+    box-shadow: 0 2px 5px black;
+    color: var(--brown3);
+    background-color: var(--brown2);
+    display: inline-block;
+    text-align: center;
+}
+
+.login-cont-title {
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.login-div{
+    margin: 20px;
+}
+
+.user-bar {
+    background-image: url(../assets/account.svg);
+    background-position-x: 200px;
+}
+
+.pass-bar {
+    background-image: url(../assets/lock.svg);
+    background-position-x: 200px;
+}

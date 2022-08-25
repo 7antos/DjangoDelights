@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Restock{% endblock %}
+
+{% block main %}
+    <div class="table-cont">
+        <span class="table-cont-title">Restock List</span>
+        <div class="table-cont-inner">
+            <div class="table-utils" id="stock-table-utils">
+                <form method="get">
+                    {{ filter.form.name }}
+                </form>
+                <div class="utils-buttons">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="submit" class="button button1" value="Restock All Ingredients" name="restock">
+                    </form>
+                </div>
+            </div>
+            <table>
+                <tr>
+                    <th class="text-header">Ingredients</th>
+                    <th class="text-header">Total Price</th>
+                    <th class="text-header">Quantity</th>
+                </tr>
+                {% if object_list %}
+                    {% for ingredient in object_list %}
+                        <tr>
+                            <td class="text-cell">{{ ingredient.name }}</td>
+                            <td class="text-cell">{{ ingredient.total_restock }} $</td>
+                            <td class="text-cell">{{ ingredient.restock_needed }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td class="text-cell empty-cell" colspan="5">No Ingredient Found</td>
+                    </tr>
+                {% endif %}
+            </table>
+            <div class="stats dual">
+                <div class="stat-text">
+                    <b>Inventory Total Cost : </b>{{ total }} $
+                </div>
+                <div class="stat-text">
+                    {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"><</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                    {% endif %}
+                    {{ page_obj.number }} of {{ paginator.num_pages }} pages
+                    {% if page_obj.has_next %}
+                        &nbsp;&nbsp;&nbsp;&nbsp;<a href="?page={{ page_obj.next_page_number }}">></a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="table-bottom">
+                <button class="button button1" onclick="location.href='{% url 'ingredients' %}'">Back</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

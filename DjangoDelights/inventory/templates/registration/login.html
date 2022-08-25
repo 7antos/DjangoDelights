@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block main %}
+    <div class="login-cont">
+        <span class="login-cont-title">Login</span>
+        <div>
+            <span>user: John_Doe</span>
+        </div>
+        <div>
+            <span>pass: idontknowthepassword</span>
+        </div>
+        <div>
+            <form method="post">
+                {% csrf_token %}
+                {% if error %}
+                    <div class="login-div">
+                        <input type="text" aria-label="Username"
+                               class="input-bar error-bar input-with-logo normal-input user-bar"
+                               name="username" placeholder="Incorrect Username" required>
+                    </div>
+                    <div class="login-div">
+                        <input type="password" aria-label="Password"
+                               class="input-bar error-bar input-with-logo normal-input pass-bar"
+                               name="password" placeholder="Or Password" required>
+                    </div>
+                {% else %}
+                    <div class="login-div">
+                        <input type="text" aria-label="Username" class="input-bar input-with-logo normal-input user-bar"
+                               name="username" placeholder="Username" required>
+                    </div>
+                    <div class="login-div">
+                        <input type="password" aria-label="Password"
+                               class="input-bar input-with-logo normal-input pass-bar"
+                               name="password" placeholder="Password" required>
+                    </div>
+                {% endif %}
+                <div class="login-div">
+                    <input type='submit' class="button button1" value='Login'>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

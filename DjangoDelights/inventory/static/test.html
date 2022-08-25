@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/style.css" rel="stylesheet">
+    <title>Title</title>
+</head>
+<body>
+
+<nav>
+    <img src="assets/brand.png" alt="brand" class="brand">
+    <div class="left-navbar">
+        Username
+        <a class="nav-button logout"></a>
+    </div>
+</nav>
+
+<main>
+    <button class="menu-button" onclick="location.href='inventory.html'">
+        <span class="menu-title">Stock</span>
+        <img src="assets/inventory.svg" alt="inventory">
+    </button>
+    <button class="menu-button" onclick="location.href='inventory.html'">
+        <span class="menu-title">Menu</span>
+        <img src="assets/restaurant.svg" alt="inventory">
+    </button>
+    <button class="menu-button" onclick="location.href='inventory.html'">
+        <span class="menu-title">Purchases</span>
+        <img src="assets/paid.svg" alt="inventory">
+    </button>
+</main>
+
+<div class="test-div">
+    <button class="menu-button">
+        <span class="menu-title">Purchases</span>
+        <img src="assets/inventory.svg" alt="inventory">
+    </button>
+</div>
+<p>Menu Button</p>
+
+<div class="test-div">
+    <input type="text" class="input-bar search-bar" aria-label="Search Bar" placeholder="Object Search">
+</div>
+<p>Search Bar</p>
+
+<div class="test-div">
+    <input type="text" class="input-bar add-bar" aria-label="Add Bar">
+</div>
+<p>Add Bar</p>
+
+<div class="test-div">
+    <input type="submit" class="button delete" value="">
+</div>
+<p>Delete</p>
+
+<div class="test-div">
+    <button class="button button1">Button</button>
+</div>
+<p>Button 1</p>
+
+<div class="test-div">
+    <button class="button button2">Button</button>
+</div>
+<p>Button 2</p>
+
+<div class="test-div">
+    <table>
+        <tr>
+            <th class="text-header">Header</th>
+            <th class="text-header">Header</th>
+            <th class="text-header">Header</th>
+        </tr>
+        <tr>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+        </tr>
+        <tr>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+        </tr>
+        <tr>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+        </tr>
+        <tr>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+            <td class="text-cell">Cell</td>
+        </tr>
+    </table>
+</div>
+<p>Table</p>
+
+<div class="test-div">
+    <div class="table-cont">
+        <span class="table-cont-title">Stock</span>
+        <div class="table-cont-inner">
+            <div class="table-utils" id="stock-table-utils">
+                <input type="text" class="input-bar search-bar" aria-label="Search Bar" placeholder="Object Search">
+                <div class="utils-buttons">
+                    <button class="button button2">Restock List</button>
+                    <button class="button button1" onclick="add_ingredient_mode()">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>Table Container</p>
+
+<script src="js/script.js"></script>
+</body>
+</html>

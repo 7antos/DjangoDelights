@@ -20,15 +20,14 @@ the inventory should be modified to accommodate what happened, as well as record
 Attributes: varchar Name, int Quantity, double Price
 Method: void Add(int quantity)
 
-### Recipe
-Attributes: varchar Name, double Price, int minStock
-Method: void Purchase()
+### RecipeRequirement
+Attribute: pk ingredient, pk recipe, int quantity
 
-### Recipe / Ingredient
-Attribute: pk ingredient, pk recipe
+### MenuItem
+Attributes: varchar Name, double Price, int minStock
 
 ### Purchase
-Attributes: pk Recipe, time
+Attributes: pk MenuItem, time
 
 ## Endpoints
 
@@ -45,3 +44,24 @@ Attributes: pk Recipe, time
 - [x] Users can add the different recipe requirements for each menu item
 - [x] Users can record purchases of menu items (only the ones that are able to created with what’s in the inventory!)
 - [x] Users can view the current inventory, menu items, their ingredients, and a log of all purchases made
+
+## Queries
+
+- What is currently in the restaurant’s inventory? ListView
+- What purchases have been made? ListView
+- What does the restaurant’s menu look like? What ingredients (and how many of each) are required for each item 
+on the menu? What’s the price of each item? ListView DetailView
+- What is the total revenue for the restaurant’s overall recorded purchases? 
+Purchases.objects.filter(menuItem.name=name, time=time).aggregate(Sum('menuItem__price'))
+- What is the total cost to the restaurant’s overall purchases made (sum of cost of all ingredients used).
+        purchases = Purchase.objects.filter(time__date=now().date())
+        total = 0
+        for purchase in purchases:
+            total += purchases.menuItem.cost()
+        return total
+- How much profit (revenue - cost) does the restaurant make?
+        purchases = Purchase.objects.filter(time__date=now().date())
+        total = 0
+        for purchase in purchases:
+            total += purchases.menuItem.price - purchases.menuItem.cost()
+        return total
