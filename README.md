@@ -60,5 +60,5 @@ Attributes: pk MenuItem, time
 1. Download e install [Python](https://www.python.org/downloads/)
 2. Project Clone: ```git clone https://github.com/7antos/DjangoDelights.git```
 3. Enter Project Directory: ```cd DjangoDelights```
-4. Run Bash File: ```./install.sh```
+4. Run Bash File: ```sudo ./install.sh```
 5. Run Server: ```python manage.py runserver```
