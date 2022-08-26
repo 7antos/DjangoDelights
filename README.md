@@ -51,6 +51,14 @@ Attributes: pk MenuItem, time
 
 1. Download e install [Python](https://www.python.org/downloads/)
 2. Project Clone: ```git clone https://github.com/a61207/ualg_parking.git```
-3. Enter Project Directory: ```cd ualg_parking```
+3. Enter Project Directory: ```cd DjangoDelights```
 4. Run Bat File: ```install.bat```
+5. Run Server: ```python manage.py runserver```
+
+### Linux
+
+1. Download e install [Python](https://www.python.org/downloads/)
+2. Project Clone: ```git clone https://github.com/a61207/ualg_parking.git```
+3. Enter Project Directory: ```cd DjangoDelights```
+4. Run Bash File: ```./install.sh```
 5. Run Server: ```python manage.py runserver```
