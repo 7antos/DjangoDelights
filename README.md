@@ -44,3 +44,13 @@ Attributes: pk MenuItem, time
 - [x] Users can add the different recipe requirements for each menu item
 - [x] Users can record purchases of menu items (only the ones that are able to created with what’s in the inventory!)
 - [x] Users can view the current inventory, menu items, their ingredients, and a log of all purchases made
+
+## Installation
+
+### Windows
+
+1. Download e install [Python](https://www.python.org/downloads/)
+2. Project Clone: ```git clone https://github.com/a61207/ualg_parking.git```
+3. Enter Project Directory: ```cd ualg_parking```
+4. Run Bat File: ```install.bat```
+5. Run Server: ```python manage.py runserver```

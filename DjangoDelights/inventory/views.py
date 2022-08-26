@@ -21,8 +21,6 @@ class Home(LoginRequiredMixin, TemplateView):
 
 
 def login_view(request):
-    call_command('migrate', '--run-syncdb', verbosity=0)
-    call_command('loaddata', 'initial_db.json', verbosity=0)
     logout(request)
     error = ''
     if 'username' in request.POST and 'password' in request.POST:
@@ -62,8 +60,6 @@ def ingredients(request):
             context['form'] = IngredientForm(request.POST)
             if context['form'].is_valid():
                 context['form'].save()
-
-            print(context['form'])
 
     # Queryset
     if context['object_list']:
