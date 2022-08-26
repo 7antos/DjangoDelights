@@ -21,7 +21,7 @@ class Home(LoginRequiredMixin, TemplateView):
 
 
 def login_view(request):
-    call_command('migrate', verbosity=0)
+    call_command('migrate', '--run-syncdb', verbosity=0)
     call_command('loaddata', 'initial_db.json', verbosity=0)
     logout(request)
     error = ''
